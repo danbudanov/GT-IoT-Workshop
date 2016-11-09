@@ -20,3 +20,7 @@ OR
 goto inet addr under wlan0
 
 Please make sure that the switch is set to 5V instead of 3.3v on the Grove shield!
+
+Run flask server:
+export FLASK_APP=hello.py
+flask run --host=0.0.0.0
