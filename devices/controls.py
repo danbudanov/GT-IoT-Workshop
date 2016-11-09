@@ -27,6 +27,7 @@ def print_lcd(line, string):
     myLcd.setCursor(line, 0)
     # Clear line
     myLcd.write("               ")
+    myLcd.setCursor(line, 0)
     myLcd.write(string)
 
 def read_temp():
