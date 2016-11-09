@@ -1,19 +1,19 @@
 # GT-IoT-Workshop
 
 ## Add Edison to GT-Other
-
+```
 ifconfig -a
 ifconfig wlan0 up
-
 configure_edison --wifi
-Enter the GTother number
-Enter provided password.
+```
+* Enter the GTother number
+* Enter GT username and password
 
+```
 ifconfig -a
-copy HWaddr from wlan0
-goto [LAWN](auth.lawn.gatech.edu)
-Login a different device
-Paste HWaddr from wlan0
+```
+* Copy address under wlan0 inet addr
+* SSH into `root@` copied address
 
 goto http://edison.local
 OR
