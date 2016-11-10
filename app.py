@@ -1,17 +1,21 @@
-from flask import Flask, request, render_template
+from flask import Flask, request, render_template, redirect
+import json
 app = Flask(__name__)
 
 
 alarm_info = {
         'time' : '12:30',
-        'day': '9/29/13',
+        'date': '9/29/13',
+        'set': True,
+        'message': "hi!"
         }
 @app.route('/', methods=['GET', 'POST'])
-def set_alarm():
+def handle_alarm():
     if request.method == 'POST':
         # parse the json
-        set_alarm( alarm_data )
+        print "POSTed!"
+        print request.form
+        return redirect('/')
+        # set_alarm( alarm_info )
     else:
-        return render_template("alarm.html", alarm_info = alarm_info)
-
-
+        return render_template("index.html", alarm = alarm_info)

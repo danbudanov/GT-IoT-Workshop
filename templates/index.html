@@ -1,0 +1,27 @@
+<!doctype html>
+<title>Flaskr</title>
+<!-- <link rel=stylesheet type=text/css href="{{ url_for('static', filename='style.css') }}"> -->
+<div class=page>
+
+  <div class=metanav>
+    {% if alarm.set %}
+    <div class=display_time>
+      <h1>your alarm is set to...</h1>
+      {% if alarm.message %}
+      <span class=message>{{ alarm.message }}</span>
+      {% endif %}
+      <span class=time>{{ alarm.time }}</span>
+      <span class=date>{{ alarm.date }}</span>
+    </div>
+    {% endif %}
+    <div class=update_time>
+      <h1>change alarm to:</h1>
+      <form method=post action=".">
+        <input type="time" name="time">
+        <input type="date" name="date">
+        <input type="text" placeholder="your alarm message" name='message'>
+        <input type="submit" value="Send" name='submit'>
+      </form>
+    </div>
+  </div>
+</div>
