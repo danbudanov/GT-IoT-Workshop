@@ -7,6 +7,7 @@ import pyupm_buzzer as upmBuzzer
 
 # Initialize Jhd1313m1 at 0x3E (LCD_ADDRESS) and 0x62 (RGB_ADDRESS)
 myLcd = lcd.Jhd1313m1(1, 0x3E, 0x62)
+colors = {'blue': (0, 0, 255), 'red': (255, 0, 0), 'green': (0, 255, 0), 'white': (255, 255, 255), 'off': (0,0,0)}
 
 # Create the temperature sensor object using AIO pin 0
 temp = grove.GroveTemp(0)
@@ -17,16 +18,12 @@ button = grove.GroveButton(4)
 # Create the light sensor object using AIO pin 1
 light = grove.GroveLight(1)
 
-# Create the buzzer object using GPIO pin 3
-buzzer = upmBuzzer.Buzzer(6)
-chords = [upmBuzzer.DO, upmBuzzer.RE, upmBuzzer.MI, upmBuzzer.FA, 
-          upmBuzzer.SOL, upmBuzzer.LA, upmBuzzer.SI, upmBuzzer.DO, 
-          upmBuzzer.SI];
 
-def print_lcd(line, string):
+def print_lcd(line, string, color='white'):
+    myLcd.setColor(*colors[color])
     myLcd.setCursor(line, 0)
     # Clear line
-    myLcd.write("               ")
+    myLcd.write(" "*16)
     myLcd.setCursor(line, 0)
     myLcd.write(string)
 
@@ -54,5 +51,12 @@ def read_light():
     return light_avg
 
 def play_sound(time, sound=0):
+    # Create the buzzer object using GPIO pin 3
+    buzzer = upmBuzzer.Buzzer(3)
+    chords = [upmBuzzer.DO, upmBuzzer.RE, upmBuzzer.MI, upmBuzzer.FA, 
+            upmBuzzer.SOL, upmBuzzer.LA, upmBuzzer.SI, upmBuzzer.DO, 
+            upmBuzzer.SI];
+
     # Play buzzer for time seconds
-    buzzer.playSound(chords[sound], 1000000*time)
+    buzzer.playSound(chords[sound], 1000000*int(time+0.5))
+    buzzer.stopSound()
