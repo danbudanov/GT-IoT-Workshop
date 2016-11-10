@@ -2,7 +2,7 @@
 from threading import Timer
 from datetime import datetime
 
-import pyupm_i2clcd as lcd
+#import pyupm_i2clcd as lcd
 
 # local imports
 from devices import controls
