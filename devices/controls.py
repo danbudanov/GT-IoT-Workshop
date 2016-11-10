@@ -20,7 +20,9 @@ light = grove.GroveLight(1)
 
 
 def print_lcd(line, string, color='white'):
-    myLcd.setColor(*colors[color])
+    if (color != "none"):
+    	myLcd.setColor(*colors[color])
+
     myLcd.setCursor(line, 0)
     # Clear line
     myLcd.write(" "*16)

@@ -57,11 +57,24 @@ self.properties['time'],
 			else:
 				controls.print_lcd(0, "Wake Up!", "red")
 				controls.play_sound(1)
-
+			
+			tmp = controls.read_temp()
+			print tmp
+			if (tmp > 75):
+				controls.print_lcd(1, "Weather: WARM", 
+"none")
+			elif (tmp < 60):
+				controls.print_lcd(1, "Weather: COLD", 
+"none")
+			else:
+				controls.print_lcd(1, "Weather: MILD", 
+"none")
 			self.disp_show_time = (not self.disp_show_time)
 		else:
 			controls.print_lcd(0, datetime.now 
 ().strftime("%H:%M:%S"), "white")
+			controls.print_lcd(1, "                    ", 
+"none")
 
 		if (controls.read_btn() == True):
 			self.in_alarm = False
