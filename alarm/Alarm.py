@@ -1,17 +1,21 @@
 # global imports
 from threading import Timer
+from datetime import datetime
 
 import pyupm_i2clcd as lcd
 
+# local imports
 from devices import controls
 
 class Alarm(object):
 	cb_cont = True
-	cb_en = False
+	cb_en = True
 	cb_int = 1
 
 	properties = None
-	disp_show_time = False;
+	
+	in_alarm = False
+	disp_show_time = False
 
 	def __init__(self):
 		global cb_int
@@ -45,20 +49,29 @@ class Alarm(object):
 	# functionality
 	###############################
 	def cb_handler(self):
-		if (self.disp_show_time == True):
-			controls.print_lcd(0, self.properties['time'])
-		else:
-			controls.print_lcd(0, "Wake Up!")
+		if (self.in_alarm == True):
+			if (self.disp_show_time == True):
+				controls.print_lcd(0, 
+self.properties['time'], 
+"green")
+			else:
+				controls.print_lcd(0, "Wake Up!", "red")
+				controls.play_sound(1)
 
-		self.disp_show_time = (not self.disp_show_time)
+			self.disp_show_time = (not self.disp_show_time)
+		else:
+			controls.print_lcd(0, datetime.now 
+().strftime("%H:%M:%S"), "white")
+
+		if (controls.read_btn() == True):
+			self.in_alarm = False
 
 	def set(self, props):
 		self.properties = props
 
 	def start(self):
-		self.cb_en = True
+		self.in_alarm = True
 
 	def stop(self):
-		self.cb_en = False
-		cb_en = False
+		self.in_alarm = False
 		
