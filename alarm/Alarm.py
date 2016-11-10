@@ -16,6 +16,11 @@ class Alarm(object):
 	def __init__(self):
 		global cb_int
 		cb_int = 1
+
+		self.init_cb()
+
+	def __exit__(self, exc_type, exc_value, traceback):
+		self.destr_cb()
 	
 	def init_cb(self):
 		self.cb_scheduler()
