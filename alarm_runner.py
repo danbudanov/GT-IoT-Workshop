@@ -8,6 +8,15 @@ from alarm import Alarm
 
 g_alarm = None
 
+
+########################
+# IO
+#
+# I2C(2) <- lcd
+# D4     <- button
+# D3     <- buzzer
+# A0     <- temp
+#########################
 def main():
 	global myAlarm 
 	# create an alarm
